@@ -1,2 +1,96 @@
-<h1>Books#show</h1>
-<p>Find me in app/views/books/show.html.erb</p>
+<div class="container mt-4">
+  <div class="row">
+    <div class="col-3">
+      <h2>User info</h2>
+
+      <table class="table">
+        <tbody>
+          <tr>
+            <% if @user.image.attached? %>
+            <%= image_tag @user.image, size: "200×200" %>
+            <% else %>
+            <%= image_tag "no_image", size: "200×200" %>
+            <% end %>
+          </tr>
+          <tr>
+            <th scope="row">name</th>
+            <td><strong><%= @user.name %></strong></td>
+          </tr>
+          <tr>
+            <th scope="row">introduction</th>
+            <td><strong>text</strong></td>
+          </tr>
+        </tbody>
+      </table>
+
+      <% if current_user.id==@user.id %>
+       <%= link_to edit_user_path(@user.id) do %>
+        <button class="btn btn-outline-secondary btn-block btn-lg">
+         <i class="fa-solid fa-gear"></i>
+        </button>
+       <% end %>
+      <% else %>
+       <%= link_to user_path(current_user.id) do %>
+        <button class="btn btn-outline-secondary btn-block btn-lg">
+         <i class="fa-solid fa-gear"></i>
+        </button>
+      <% end %>
+       <% end %>  
+        
+
+      <h2 class="mt-3">New book</h2>
+      <%= form_with model: @book do |f| %>
+
+       <h5 class="font-weight-light">Title</h5>
+        <%= f.text_field :title %>
+
+       <h5 class="font-weight-light">Opinion</h5>
+        <%= f.text_area :body %>
+
+       <button type="submit" class="btn btn-success btn-md mt-3">Create Book</button>
+
+      <% end %>
+    </div>
+
+    <%#ここからページ右側 %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Book detail</h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th>
+            <td>
+                <% if @user.image.attached? %>
+                  <%= image_tag @user.image, size: "200×200" %>
+                  <% else %>
+                  <%= image_tag "no_image", size: "200×200" %>
+                <% end %>
+                  <%= link_to user_path(@user.id) do %>
+                  <h6><%= @user.name %></h6>
+                  <% end %>
+            </td>
+            <td><%= link_to book_path(@bookfind.id) do %>
+                <%= @bookfind.title %>
+                <% end %>
+            </td>
+            <td><%= @bookfind.body %></td>
+            
+            <% if(current_user.id==@bookfind.user_id) %>
+            <td>
+              <%= link_to edit_book_path(@bookfind.id) do %>
+              <button class= "btn btn-success btn-sm">Edit</button>
+              <% end %>
+            </td>
+            <td><%= link_to destroy_book_path(@bookfind.id), method: :delete, "data-confirm" => "本当に排除しますか？" do %>
+                <button class= "btn btn-danger btn-sm">Destroy</button>
+                <% end %>
+            </td>
+            <% end %>
+            </th>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+

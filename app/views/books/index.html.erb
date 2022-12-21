@@ -1,21 +1,28 @@
 <div class="container mt-4">
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
       <h2>User info</h2>
-      <img src="/Bookers2/app/assets/images/sample-author1.jpg">
 
       <table class="table">
         <tbody>
+          <tr>
+            <% if @user.image.attached? %>
+            <%= image_tag @user.image, size: "200×200" %>
+            <% else %>
+            <%= image_tag "no_image", size: "200×200" %>
+            <% end %>
+          </tr>
           <tr>
             <th scope="row">name</th>
             <td><strong><%= @user.name %></strong></td>
           </tr>
           <tr>
             <th scope="row">introduction</th>
-            <td><strong>aaaaaaa</strong></td>
+            <td><strong>text</strong></td>
           </tr>
         </tbody>
       </table>
+
        <a class="btn btn-outline-secondary btn-block btn-lg" href="users/:id/edit" role="button">
          <i class="fa-solid fa-gear"></i>
        </a>
@@ -33,5 +40,44 @@
 
        <% end %>
     </div>
-  </div>
-</div>
+
+<%# ここからページ右側 %>
+    <div class="col-md-8 offset-md-1">
+      <h2>Books</h2>
+
+      <table class="table">
+        <thead>
+         <tr>
+           <th></th>
+           <th scope="col"><strong>Title</strong></th>
+           <th scope="col"><strong>Opinion</strong></th>
+         </tr>
+        </thead>
+        <tbody>
+          <% @books.each do |book| %>
+           <tr>
+            <td>
+              <% if @user.image.attached? %>
+               <%= link_to user_path(book.user_id) do %>
+            　 <%= @user.image %>
+            　 <% end %>
+              <% else %>
+               <%= link_to user_path(book.user_id) do %>
+               <%= image_tag "no_image" %>
+               <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= link_to book_path(book.id) do %>
+              <%= book.title %>
+              <% end %>
+            </td>
+            <td>
+              <%= book.body %>
+            </td>
+           </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  

@@ -9,8 +9,14 @@ Rails.application.routes.draw do
   get "/books" => "books#index"
 
 
-  resources :users, only: [:index, :show, :edit] do
-   resources :books
-  end
+  post "/books/:id" => "books#create"
+
+  post "/users" => "books#create"
+
+  delete "/books/:id" => "books#destroy", as: "destroy_book"
+
+  resources :users, only: [:index, :show, :edit]
+
+  resources :books
 
 end
