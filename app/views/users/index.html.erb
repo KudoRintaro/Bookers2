@@ -7,7 +7,7 @@
         <tbody>
           <tr>
             <% if current_user.image.attached? %>
-            <%= image_tag user.image, size: "200×200" %>
+            <%= image_tag current_user.image, size: "200×200" %>
             <% else %>
             <%= image_tag "no_image", size: "200×200" %>
             <% end %>
@@ -18,7 +18,7 @@
           </tr>
           <tr>
             <th scope="row">introduction</th>
-            <td><strong>text</strong></td>
+            <td><strong><%= current_user.introduction %></strong></td>
           </tr>
         </tbody>
       </table>

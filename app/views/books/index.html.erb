@@ -2,23 +2,20 @@
   <div class="row">
     <div class="col-md-3">
       <h2>User info</h2>
-
+       <% if @user.image.attached? %>
+        <p><%= image_tag @user.image(50,50) %></p>
+       <% else %>
+        <%= image_tag "no_image", size: "100×66" %>
+       <% end %>
       <table class="table">
         <tbody>
-          <tr>
-            <% if @user.image.attached? %>
-            <%= image_tag @user.image, size: "200×200" %>
-            <% else %>
-            <%= image_tag "no_image", size: "200×200" %>
-            <% end %>
-          </tr>
           <tr>
             <th scope="row">name</th>
             <td><strong><%= @user.name %></strong></td>
           </tr>
           <tr>
             <th scope="row">introduction</th>
-            <td><strong>text</strong></td>
+            <td><strong><%= @user.introduction %></strong></td>
           </tr>
         </tbody>
       </table>
@@ -59,11 +56,11 @@
             <td>
               <% if @user.image.attached? %>
                <%= link_to user_path(book.user_id) do %>
-            　 <%= @user.image %>
+            　 <%= image_tag @user.image(100,66) %>
             　 <% end %>
               <% else %>
                <%= link_to user_path(book.user_id) do %>
-               <%= image_tag "no_image" %>
+               <%= image_tag "no_image", size: "100×66" %>
                <% end %>
               <% end %>
             </td>
@@ -80,4 +77,3 @@
         </tbody>
       </table>
     </div>
-  
