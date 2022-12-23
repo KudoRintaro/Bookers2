@@ -1,17 +1,11 @@
-<div class="container mt-4">
+<div class="container mt-3">
   <div class="row">
-    <div class="col-3">
+    <div class="col-md-3">
       <h2>User info</h2>
+      <%= image_tag @user.get_profile_image(100,100) %>
 
       <table class="table">
         <tbody>
-          <tr>
-            <% if @user.image.attached? %>
-            <%= image_tag @user.image(100,66) %>
-            <% else %>
-            <%= image_tag "no_image", size: "200×200" %>
-            <% end %>
-          </tr>
           <tr>
             <th scope="row">name</th>
             <td><strong><%= @user.name %></strong></td>
@@ -23,18 +17,10 @@
         </tbody>
       </table>
 
-      <% if current_user.id==@user.id %>
        <%= link_to edit_user_path(@user.id) do %>
         <button class="btn btn-outline-secondary btn-block btn-lg">
          <i class="fa-solid fa-gear"></i>
         </button>
-       <% end %>
-      <% else %>
-       <%= link_to user_path(current_user.id) do %>
-        <button class="btn btn-outline-secondary btn-block btn-lg">
-         <i class="fa-solid fa-gear"></i>
-        </button>
-      <% end %>
        <% end %>
 
 
@@ -60,17 +46,13 @@
           <tr>
             <th>
             <td>
-                <% if @user.image.attached? %>
-                  <%= image_tag @user.image(100,66) %>
-                  <% else %>
-                  <%= image_tag "no_image", size: "200×200" %>
+                <%= image_tag @user.get_profile_image(80,80) %>
+                <%= link_to user_path(@user.id) do %>
+                 <h6><%= @user.name %></h6>
                 <% end %>
-                  <%= link_to user_path(@user.id) do %>
-                  <h6><%= @user.name %></h6>
-                  <% end %>
             </td>
             <td><%= link_to book_path(@bookfind.id) do %>
-                <%= @bookfind.title %>
+                 <%= @bookfind.title %>
                 <% end %>
             </td>
             <td><%= @bookfind.body %></td>

@@ -1,17 +1,4 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Bookers2</title>
-    <script src="https://kit.fontawesome.com/822b72a28c.js" crossorigin="anonymous"></script>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <%= csrf_meta_tags %>
-    <%= csp_meta_tag %>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css">
-    <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
-    <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
-  </head>
-  <body>
-   <div class="container">
+ <div class="container">
      <div class="row">
       <div class="mx-auto mt-3 col-11 col-sm-10 col-md-9 col-lg-7 col-xl-6">
        <h1>
@@ -31,31 +18,34 @@
      <div class="row">
        <div class="mx-auto col-11 col-sm-10 col-md-9 col-lg-7 col-xl-6">
         <% if user_signed_in? %>
-         <%= link_to user_path(current_user.id) do %>
-         <p class="btn btn-info btn-sm btn-block" role="button">
-           Log in
-         </p>
-         <% end %>
-          <%= link_to user_path(current_user.id) do %>
-          <p class="btn btn-success btn-sm btn-block" role="button">
-           sign up
-          </p>
-          <% end %>
+        <div class="btn-wrapper col-10 mx-auto">
+      　    <%= link_to user_path(current_user.id) do %>
+            <button class="btn btn-info btn-sm btn-block">
+      　     Log in
+            </button>
+      　    <% end %>
+           <%= link_to user_path(current_user.id) do %>
+            <button class="btn btn-success btn-sm btn-block">
+             Sign in
+            </button>
+           <% end %>
+        </div>
          <% else %>
-          <%= link_to new_user_session_path do %>
-          <p class="btn btn-info btn-sm btn-block" role="button">
-           Log in
-          </p>
-          <% end %>
-          <%= link_to  new_user_registration_path do %>
-          <p class="btn btn-success btn-sm btn-block" role="button">
-           sign up
-          </p>
-          <% end %>
+         <div class="btn-wrapper col-10 mx-auto mt-1">
+          <div class="row">
+           <a class="btn btn-info btn-sm btn-block mb-4 sign_in" href="users/sign_in">
+          　 Log in
+           </a>
+          </div>
+          <div class="row">
+           <a class="btn btn-success btn-sm btn-block sign_up" href="users/sign_up">
+            Sign up
+           </a>
+          </div>
+         </div>
          <% end %>
-       </div>
        </div>
      </div>
-   </div>
-  </body>
+ </div>
+
 

@@ -6,11 +6,7 @@
       <table class="table">
         <tbody>
           <tr>
-            <% if current_user.image.attached? %>
-            <%= image_tag current_user.image, size: "200×200" %>
-            <% else %>
-            <%= image_tag "no_image", size: "200×200" %>
-            <% end %>
+           <%= image_tag current_user.get_profile_image(100,100) %>
           </tr>
           <tr>
             <th scope="row">name</th>
@@ -23,9 +19,11 @@
         </tbody>
       </table>
 
-       <a class="btn btn-outline-secondary btn-block btn-lg" href="users/:id/edit" role="button">
+      <%= link_to edit_user_path(current_user.id) do %>
+        <button class="btn btn-outline-secondary btn-block btn-lg">
          <i class="fa-solid fa-gear"></i>
-       </a>
+        </button>
+      <% end %>  
 
        <h2 class="mt-3">New book</h2>
        <%= form_with model: @book do |f| %>
@@ -56,11 +54,7 @@
          <% @users.each do |user| %>
          <tr>
           <td>
-              <% if user.image.attached? %>
-               <%= user.image %>
-              <% else %>
-               <%= image_tag "no_image" %>
-              <% end %>
+               <%= image_tag user.get_profile_image(80,80) %>
           </td>
           <td>
               <%= user.name %>
